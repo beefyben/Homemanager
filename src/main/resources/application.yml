@@ -1,0 +1,40 @@
+spring:
+  main:
+    lazy-initialization: false
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost:3306}/${DB_NAME:homemanager}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:root}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: off
+  servlet:
+    multipart:
+      max-file-size: 7000MB
+      max-request-size: 7000MB
+
+server:
+  port: 8081
+
+app:
+  name: "homemanager"
+  version: "@project.version@"
+logging:
+  level:
+    dev.ben.Homemanager: INFO
+
+jwt:
+  secret: ${JWT_SECRET:zaoiazndoazidnoazdi}
+  token-duration: ${JWT_TOKEN_DURATION:6000}                 # default: 10 min
+  issuer: homemanager
+
+cors:
+  allowed-origin: ${ALLOWED_ORIGINS:http://localhost:4200} # Doit correspondre à l'url du front
+
+
+javax:
+  persistence:
+    schema-generation:
+      scripts:
+        action: create
