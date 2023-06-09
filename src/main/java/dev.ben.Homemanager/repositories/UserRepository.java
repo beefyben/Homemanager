@@ -14,3 +14,4 @@ public interface UserRepository extends CrudRepository<User, Long> {
     @Query("SELECT COUNT(u) = 1 FROM User u WHERE u.email = ?1")
     boolean existsByEmail(String email);
 }
+

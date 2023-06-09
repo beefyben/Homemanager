@@ -13,7 +13,12 @@ public class UserView {
 
     String email;
 
+    String firstname;
+
+    String lastname;
+
     String username;
 
     boolean isAdmin;
+
 }

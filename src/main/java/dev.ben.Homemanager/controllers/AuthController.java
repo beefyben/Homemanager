@@ -15,10 +15,7 @@ import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
@@ -56,6 +53,8 @@ public class AuthController {
         user.setEmail(body.getEmail());
         user.setPassword(passwordEncoder.encode(body.getPassword()));
         user.setAdmin(false);
+        user.setFirstname(body.getFirstname());
+        user.setLastname(body.getLastname());
 
         userRepository.save(user);
         String token = jwtTokenUtil.generateToken(user);

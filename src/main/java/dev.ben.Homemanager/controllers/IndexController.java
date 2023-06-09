@@ -19,7 +19,7 @@ public class IndexController {
     private final UserRepository userRepository;
     private final ModelMapper mapper;
 
-    @GetMapping()
+    @GetMapping("current-user")
     public Optional<UserView> hello(@AuthenticationPrincipal TokenPayload token) {
         var currentUserLoggedIn = userRepository.findById(token.id());
         return currentUserLoggedIn.map(user -> mapper.map(user, UserView.class));

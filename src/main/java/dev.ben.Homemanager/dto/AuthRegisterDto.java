@@ -10,8 +10,11 @@ public class AuthRegisterDto {
 
     @NotEmpty
     @Size(min = 2, max = 30)
-    private String username;
+    private String firstname;
 
+    @NotEmpty
+    @Size(min = 2, max = 30)
+    private String lastname;
     @Email
     private String email;
 
