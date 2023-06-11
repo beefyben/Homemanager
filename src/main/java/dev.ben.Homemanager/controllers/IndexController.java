@@ -2,7 +2,9 @@ package dev.ben.Homemanager.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.ben.Homemanager.config.jwt.TokenPayload;
+import dev.ben.Homemanager.database.Homes;
 import dev.ben.Homemanager.dto.UserView;
+import dev.ben.Homemanager.repositories.HomeRepository;
 import dev.ben.Homemanager.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -17,11 +19,17 @@ import java.util.Optional;
 public class IndexController {
 
     private final UserRepository userRepository;
+    private final HomeRepository homeRepository;
     private final ModelMapper mapper;
 
     @GetMapping("current-user")
     public Optional<UserView> hello(@AuthenticationPrincipal TokenPayload token) {
         var currentUserLoggedIn = userRepository.findById(token.id());
         return currentUserLoggedIn.map(user -> mapper.map(user, UserView.class));
+    }
+
+    @GetMapping("homes")
+    public Iterable<Homes> getHomes() {
+        return homeRepository.findAll();
     }
 }
