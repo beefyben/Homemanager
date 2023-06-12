@@ -1,8 +1,11 @@
 package dev.ben.Homemanager.dto;
 
+import dev.ben.Homemanager.database.User;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.persistence.ManyToOne;
 
 @Data
 @Getter
@@ -15,9 +18,23 @@ public class HomeView {
 
     String homeaddress;
 
-    boolean nodogs;
+    String homefirstdate;
+
+    String homelastdate;
+
+
+    boolean noanimal;
 
     boolean noparty;
 
+    boolean waterplant;
+
+    boolean feedanimal;
+
+    boolean nosound;
+
+
+    @ManyToOne
+    User creator;
 }
 

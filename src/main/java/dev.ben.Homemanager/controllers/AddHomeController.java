@@ -1,21 +1,17 @@
 package dev.ben.Homemanager.controllers;
 
-import dev.ben.Homemanager.config.jwt.JwtTokenUtil;
+
 import dev.ben.Homemanager.config.jwt.TokenPayload;
-import dev.ben.Homemanager.database.Homes;
+import dev.ben.Homemanager.database.Home;
 import dev.ben.Homemanager.dto.*;
 import dev.ben.Homemanager.exceptions.HttpBadRequestException;
 import dev.ben.Homemanager.repositories.HomeRepository;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import dev.ben.Homemanager.repositories.UserRepository;
-import dev.ben.Homemanager.dto.AddHomeView;
-import dev.ben.Homemanager.dto.HomeView;
-
 
 
 @RestController
@@ -29,8 +25,9 @@ public class AddHomeController {
 
     private final UserRepository userRepository;
 
+
     @PostMapping("/addhome")
-    public Homes register(@AuthenticationPrincipal TokenPayload token, @RequestBody AddHomeDto body) {
+    public Home register(@AuthenticationPrincipal TokenPayload token, @RequestBody AddHomeDto body) {
         if (homeRespository.existsByHomeName(body.getHomename())) {
             throw new HttpBadRequestException("Home already exists");
         }
@@ -38,13 +35,19 @@ public class AddHomeController {
         var user = userRepository.findById(token.id()).get();
 
         LOG.info("creating Home with Homename {}", body.getHomename());
-        Homes homes = new Homes();
-        homes.setHomename(body.getHomename());
-        homes.setHomeaddress(body.getHomeaddress());
-        homes.setCreator(user);
-        homes.setNoanimal(body.isNoanimal());
-        homeRespository.save(homes);
-        return homes;
+        Home home = new Home();
+        home.setHomename(body.getHomename());
+        home.setHomeaddress(body.getHomeaddress());
+        home.setHomefirstdate(body.getHomefirstdate());
+        home.setHomelastdate(body.getHomelastdate());
+        home.setCreator(user);
+        home.setNoanimal(body.isNoanimal());
+        home.setNoparty(body.isNoparty());
+        home.setWaterplant(body.isWaterplant());
+        home.setNosound(body.isNosound());
+        home.setFeedanimal(body.isFeedanimal());
+        homeRespository.save(home);
+        return home;
     }
 }
 

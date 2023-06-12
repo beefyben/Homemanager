@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
-public class Homes {
+public class Home {
 
     @GeneratedValue
     @Id
@@ -25,21 +25,19 @@ public class Homes {
 
     String homefirstdate;
 
-    /**
-    omename!: string;
-    homeaddress!: string;
-    homefirstdate!: string;
-    homelastdate!: string;
-    noanimal!: boolean;
-    noparty!:boolean;
-    nosound!:boolean;
-    waterplant!:boolean;
-    feedanimal!:boolean;
-     **/
+    String homelastdate;
+
 
     boolean noanimal;
 
     boolean noparty;
+
+    boolean waterplant;
+
+    boolean feedanimal;
+
+    boolean nosound;
+
 
     @ManyToOne
     User creator;

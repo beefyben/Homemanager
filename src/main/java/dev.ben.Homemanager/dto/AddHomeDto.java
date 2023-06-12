@@ -18,7 +18,27 @@ public class AddHomeDto {
     private String homeaddress;
 
     @NotEmpty
+    @Size(min = 2, max = 30)
+    private String homefirstdate;
+
+    @NotEmpty
+    @Size(min = 2, max = 30)
+    private String homelastdate;
+
+    @NotEmpty
     boolean noanimal;
+
+    @NotEmpty
+    boolean nosound;
+
+    @NotEmpty
+    boolean noparty;
+
+    @NotEmpty
+    boolean feedanimal;
+
+    @NotEmpty
+    boolean waterplant;
 
 
 }

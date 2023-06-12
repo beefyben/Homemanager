@@ -1,8 +1,7 @@
 package dev.ben.Homemanager.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.ben.Homemanager.config.jwt.TokenPayload;
-import dev.ben.Homemanager.database.Homes;
+import dev.ben.Homemanager.database.Home;
 import dev.ben.Homemanager.dto.UserView;
 import dev.ben.Homemanager.repositories.HomeRepository;
 import dev.ben.Homemanager.repositories.UserRepository;
@@ -29,7 +28,7 @@ public class IndexController {
     }
 
     @GetMapping("homes")
-    public Iterable<Homes> getHomes() {
+    public Iterable<Home> getHomes() {
         return homeRepository.findAll();
     }
 }
